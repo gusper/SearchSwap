@@ -3,6 +3,9 @@
     "name": "SearchSwap",
     "description": "Simple and minimal search engine switcher.",
     "version": "1.0",
+    "permissions": [
+      "activeTab"
+    ],
     "action": {
       "default_popup": "popup/popup.html"
     }
