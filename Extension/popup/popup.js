@@ -1,10 +1,7 @@
-document.getElementById("btnBing").addEventListener("click", handler);
-document.getElementById("btnGoogle").addEventListener("click", handler);
-document.getElementById("btnUltimateGuitar").addEventListener("click", handler);
-document.getElementById("btnStackOverflow").addEventListener("click", handler);
-document.getElementById("btnReddit").addEventListener("click", handler);
-document.getElementById("btnTwitter").addEventListener("click", handler);
-document.getElementById("btnDuckDuckGo").addEventListener("click", handler);
+const btns = [...document.getElementsByClassName("target")];
+btns.forEach(btn => {
+    btn.addEventListener("click", handler);
+});
 
 const targetList = new Map([ 
     ["bing", "https://www.bing.com/search?q=QQQ"],
@@ -27,8 +24,6 @@ async function handler(sender)
         searchText = await getSearchText(tab[0].url, "value");
     let targetKey = sender.srcElement.id.substring(3).toLowerCase();
     let searchUrl = targetList.get(targetKey).replace("QQQ", searchText);
-
-    alert("q: " + searchUrl);
     chrome.tabs.create({ url: searchUrl })
 }
 
@@ -42,6 +37,4 @@ async function getSearchText(url, variable) {
             return decodeURIComponent(pair[1]);
         }
     }
-    
-    console.log("Query variable '%s' not found", variable);
 }
