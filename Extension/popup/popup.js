@@ -17,7 +17,6 @@ const targetList = new Map([
 
 async function handler(sender)
 {
-    console.log(sender.srcElement.id);
     let queryOptions = { active: true, currentWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
     let searchText = await getSearchText(tab.url);
@@ -30,7 +29,6 @@ async function getSearchText(url, variable) {
     let searchIdentifiers = ["q", "value", "search_query", "k"];
     let queryString = url.substring(url.indexOf("?") + 1, url.length);
     let vars = queryString.split('&');
-    console.log(vars);
   
     for (let siIndex = 0; siIndex < searchIdentifiers.length; siIndex++) {
         for (var i = 0; i < vars.length; i++) {
