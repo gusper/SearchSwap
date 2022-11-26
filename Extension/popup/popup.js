@@ -25,7 +25,7 @@ async function handler(sender)
     chrome.tabs.create({ url: searchUrl })
 }
 
-async function getSearchText(url, variable) {
+async function getSearchText(url) {
     let searchIdentifiers = ["q", "value", "search_query", "k"];
     let queryString = url.substring(url.indexOf("?") + 1, url.length);
     let vars = queryString.split('&');
