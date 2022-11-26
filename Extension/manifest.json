@@ -7,6 +7,12 @@
       "activeTab",
       "tabs"
     ],
+    "icons": {
+      "16": "images/ss-logo-16.png",
+      "32": "images/ss-logo-32.png",
+      "48": "images/ss-logo-48.png",
+      "128": "images/ss-logo-128.png"
+    },
     "action": {
       "default_popup": "popup/popup.html"
     }
