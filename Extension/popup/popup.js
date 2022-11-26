@@ -2,13 +2,17 @@ const btns = [...document.getElementsByClassName("target")];
 btns.forEach(btn => { btn.addEventListener("click", handler); });
 
 const targetList = new Map([
+    ["amazon", "https://www.amazon.com/s?k=%s"],
     ["bing", "https://www.bing.com/search?q=%s"],
+    ["duckduckgo", "https://duckduckgo.com/?q=%s"],
+    ["github", "https://github.com/search?q=%s&ref=opensearch"],
     ["google", "https://www.google.com/search?q=%s"],
-    ["ultimateguitar", "https://www.ultimate-guitar.com/search.php?search_type=title&value=%s"],
-    ["stackoverflow", "https://stackoverflow.com/search?q=%s"],
     ["reddit", "https://www.reddit.com/search/?q=%s"],
+    ["stackoverflow", "https://stackoverflow.com/search?q=%s"],
+    ["superuser", "https://superuser.com/search?q=%s"],
     ["twitter", "https://twitter.com/search?q=%s"],
-    ["duckduckgo", "https://duckduckgo.com/?q=%s"]
+    ["ultimateguitar", "https://www.ultimate-guitar.com/search.php?search_type=title&value=%s"],
+    ["youtube", "https://www.youtube.com/results?search_query=%s&page={startPage?}&utm_source=opensearch"],
 ]);
 
 async function handler(sender)
