@@ -1,7 +1,5 @@
 const btns = [...document.getElementsByClassName("target")];
-btns.forEach(btn => {
-    btn.addEventListener("click", handler);
-});
+btns.forEach(btn => { btn.addEventListener("click", handler); });
 
 const targetList = new Map([ 
     ["bing", "https://www.bing.com/search?q=QQQ"],
@@ -11,7 +9,6 @@ const targetList = new Map([
     ["reddit", "https://www.reddit.com/search/?q=QQQ"],
     ["twitter", "https://twitter.com/search?q=QQQ"],
     ["duckduckgo", "https://duckduckgo.com/?q=QQQ"]
-
 ]);
 
 async function handler(sender)
