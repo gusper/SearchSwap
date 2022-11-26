@@ -18,24 +18,26 @@ const targetList = new Map([
 async function handler(sender)
 {
     console.log(sender.srcElement.id);
-    let queryOptions = { active: true };
-    let tab = await chrome.tabs.query(queryOptions);
-    let searchText = await getSearchText(tab[0].url, "q");
-    if (typeof searchText === "undefined")
-        searchText = await getSearchText(tab[0].url, "value");
+    let queryOptions = { active: true, currentWindow: true };
+    let [tab] = await chrome.tabs.query(queryOptions);
+    let searchText = await getSearchText(tab.url);
     let targetKey = sender.srcElement.id.substring(3).toLowerCase();
     let searchUrl = targetList.get(targetKey).replace("%s", searchText);
     chrome.tabs.create({ url: searchUrl })
 }
 
 async function getSearchText(url, variable) {
+    let searchIdentifiers = ["q", "value", "search_query", "k"];
     let queryString = url.substring(url.indexOf("?") + 1, url.length);
     let vars = queryString.split('&');
-
-    for (var i = 0; i < vars.length; i++) {
-        let pair = vars[i].split('=');
-        if (decodeURIComponent(pair[0]) == variable) {
-            return decodeURIComponent(pair[1]);
+    console.log(vars);
+  
+    for (let siIndex = 0; siIndex < searchIdentifiers.length; siIndex++) {
+        for (var i = 0; i < vars.length; i++) {
+            let pair = vars[i].split('=');
+            if (decodeURIComponent(pair[0]) === searchIdentifiers[siIndex]) {
+                return decodeURIComponent(pair[1]);
+            }
         }
     }
 }
