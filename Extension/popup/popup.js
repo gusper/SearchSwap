@@ -30,8 +30,8 @@ async function getSearchText(url) {
     let queryString = url.substring(url.indexOf("?") + 1, url.length);
     let vars = queryString.split('&');
   
-    for (let siIndex = 0; siIndex < searchIdentifiers.length; siIndex++) {
-        for (var i = 0; i < vars.length; i++) {
+    for (var i = 0; i < vars.length; i++) {
+        for (let siIndex = 0; siIndex < searchIdentifiers.length; siIndex++) {
             let pair = vars[i].split('=');
             if (decodeURIComponent(pair[0]) === searchIdentifiers[siIndex]) {
                 return decodeURIComponent(pair[1]);
