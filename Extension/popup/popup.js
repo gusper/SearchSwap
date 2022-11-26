@@ -1,14 +1,14 @@
 const btns = [...document.getElementsByClassName("target")];
 btns.forEach(btn => { btn.addEventListener("click", handler); });
 
-const targetList = new Map([ 
-    ["bing", "https://www.bing.com/search?q=QQQ"],
-    ["google", "https://www.google.com/search?q=QQQ"],
-    ["ultimateguitar", "https://www.ultimate-guitar.com/search.php?search_type=title&value=QQQ"],
-    ["stackoverflow", "https://stackoverflow.com/search?q=QQQ"],
-    ["reddit", "https://www.reddit.com/search/?q=QQQ"],
-    ["twitter", "https://twitter.com/search?q=QQQ"],
-    ["duckduckgo", "https://duckduckgo.com/?q=QQQ"]
+const targetList = new Map([
+    ["bing", "https://www.bing.com/search?q=%s"],
+    ["google", "https://www.google.com/search?q=%s"],
+    ["ultimateguitar", "https://www.ultimate-guitar.com/search.php?search_type=title&value=%s"],
+    ["stackoverflow", "https://stackoverflow.com/search?q=%s"],
+    ["reddit", "https://www.reddit.com/search/?q=%s"],
+    ["twitter", "https://twitter.com/search?q=%s"],
+    ["duckduckgo", "https://duckduckgo.com/?q=%s"]
 ]);
 
 async function handler(sender)
@@ -20,7 +20,7 @@ async function handler(sender)
     if (typeof searchText === "undefined")
         searchText = await getSearchText(tab[0].url, "value");
     let targetKey = sender.srcElement.id.substring(3).toLowerCase();
-    let searchUrl = targetList.get(targetKey).replace("QQQ", searchText);
+    let searchUrl = targetList.get(targetKey).replace("%s", searchText);
     chrome.tabs.create({ url: searchUrl })
 }
 
