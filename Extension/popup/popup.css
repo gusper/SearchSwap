@@ -1,0 +1,70 @@
+body {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 22px;
+    margin: 0;
+}
+
+div {
+    display: inline-block;
+    width: 100%;
+}
+
+#container {
+    min-width: 330px;
+    min-height: 370px;
+}
+
+#header {
+    background-color: rgb(232, 232, 232);
+    border: 0px;
+    border-bottom: 1px rgb(99, 99, 99);
+    border-style: solid;
+    margin: 0;
+}
+
+#title {
+    color:rgb(65, 64, 64);
+    font-family: 'Noticia Text', serif;
+    font-size: 1.4em;
+    float: left;
+    margin: 5px;
+}
+
+#logo {
+    float: left;
+    text-align: right;
+    margin: 10px 5px 10px 10px;
+}
+
+#targets {
+    display: inline-flex;
+    flex-flow: row wrap;
+    margin: 2px 5px 5px;
+}
+
+button {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: rgb(100, 100, 100);
+    border: 2px solid rgb(65, 64, 64);
+    border-radius: 0.3em;
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.32);
+    color: rgb(238, 238, 238);
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    height: 30px;
+    line-height: 1;
+    margin: 6px;
+    width: 145px;
+    padding: 5px 10px;
+    text-decoration: none;
+    text-align: center;
+    /* text-transform: uppercase;     */
+
+    transition: all 150ms ease-in-out;
+   
+}

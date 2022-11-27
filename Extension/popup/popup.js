@@ -13,6 +13,7 @@ const targetList = new Map([
     ["twitter", "https://twitter.com/search?q=%s"],
     ["ultimateguitar", "https://www.ultimate-guitar.com/search.php?search_type=title&value=%s"],
     ["youtube", "https://www.youtube.com/results?search_query=%s&page={startPage?}&utm_source=opensearch"],
+    ["hackernews", "https://hn.algolia.com/?q=%s"]
 ]);
 
 async function handler(sender)
