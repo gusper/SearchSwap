@@ -1,20 +1,43 @@
-<html>
-  <head>
-  </head>
-  <body>
-    <h1>SearchSwap</h1>
-    <button class="target" id="btnBing">Bing</button>
-    <button class="target" id="btnGoogle">Google</button>
-    <button class="target" id="btnStackOverflow">Stack Overflow</button>
-    <button class="target" id="btnUltimateGuitar">Ultimate Guitar</button>
-    <button class="target" id="btnReddit">Reddit</button>
-    <button class="target" id="btnTwitter">Twitter</button>
-    <button class="target" id="btnDuckDuckGo">DuckDuckGo</button>
-    <button class="target" id="btnGitHub">GitHub</button>
-    <button class="target" id="btnYouTube">YouTube</button>
-    <button class="target" id="btnSuperUser">Super User</button>
-    <button class="target" id="btnAmazon">Amazon</button>
+<!DOCTYPE html>
+<html lang="en">
 
-    <script src="popup.js"></script>
-  </body>
+<head>
+  <meta name="viewport" content="width=device-width">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noticia+Text:wght@700&family=Titillium+Web:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="popup.css" />
+  <title>SearchSwap</title>
+</head>
+
+<body>
+  <div id="container">
+    <div id="header">
+      <img id="logo" src="/images/ss-logo-384.png" width="32" height="32" alt="SearchSwap logo">
+      <h1 id="title">SearchSwap</h1>
+    </div>
+    <div id="targets">
+      <button class="target" type="button" id="btnBing">Bing</button>
+      <button class="target" type="button" id="btnGoogle">Google</button>
+      <button class="target" type="button" id="btnStackOverflow">Stack Overflow</button>
+      <button class="target" type="button" id="btnUltimateGuitar">Ultimate Guitar</button>
+      <button class="target" type="button" id="btnYouTube">YouTube</button>
+      <button class="target" type="button" id="btnReddit">Reddit</button>
+      <button class="target" type="button" id="btnTwitter">Twitter</button>
+      <button class="target" type="button" id="btnAmazon">Amazon</button>
+      <button class="target" type="button" id="btnGitHub">GitHub</button>
+      <button class="target" type="button" id="btnHackerNews">Hacker News</button>
+      <button class="target" type="button" id="btnSuperUser">Super User</button>
+      <button class="target" type="button" id="btnDuckDuckGo">DuckDuckGo</button>
+    </div>
+    <div id="footer">
+      <button type="button" id="btnMoreInfo">More info</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
 </html>
