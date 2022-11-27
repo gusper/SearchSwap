@@ -22,6 +22,12 @@ async function handler(sender)
     let [tab] = await chrome.tabs.query(queryOptions);
     let searchText = await getSearchText(tab.url);
     let targetKey = sender.srcElement.id.substring(3).toLowerCase();
+    
+    if (!searchText) {
+        alert("Not finding search text in current tab's URL.");
+        return;
+    }
+    
     let searchUrl = targetList.get(targetKey).replace("%s", searchText);
     chrome.tabs.create({ url: searchUrl })
 }
