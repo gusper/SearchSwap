@@ -1,5 +1,6 @@
 const btns = [...document.getElementsByClassName("target")];
 btns.forEach(btn => { btn.addEventListener("click", handler); });
+btnMoreInfo.addEventListener("click", moreInfoHandler);
 
 const targetList = new Map([
     ["amazon", "https://www.amazon.com/s?k=%s"],
@@ -45,4 +46,9 @@ async function getSearchText(url) {
             }
         }
     }
+}
+
+async function moreInfoHandler(sender)
+{
+    chrome.tabs.create({ url: "https://gusperez.com/software/searchswap" })
 }

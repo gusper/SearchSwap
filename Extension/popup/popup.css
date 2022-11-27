@@ -5,13 +5,14 @@ body {
 }
 
 div {
+    border: 0;
     display: inline-block;
     width: 100%;
 }
 
 #container {
-    min-width: 330px;
-    min-height: 370px;
+    width: 330px;
+    height: 340px;
 }
 
 #header {
@@ -42,7 +43,7 @@ div {
     margin: 2px 5px 5px;
 }
 
-button {
+button.target {
     box-sizing: border-box;
     appearance: none;
     background-color: rgb(100, 100, 100);
@@ -63,8 +64,25 @@ button {
     padding: 5px 10px;
     text-decoration: none;
     text-align: center;
-    /* text-transform: uppercase;     */
+}
 
-    transition: all 150ms ease-in-out;
-   
+#footer {
+    background-color: rgb(232, 232, 232);
+    border: 0px;
+    border-top: 1px rgb(99, 99, 99);
+    border-style: solid;
+    display: block;
+    height: 35px;
+    margin: 0;
+}
+
+#btnMoreInfo {
+    background-color: transparent;
+    border: 0;
+    color:rgb(65, 64, 64);
+    cursor: pointer;
+    font-size: 0.6em;
+    float: right;
+    margin: 5px 15px 0 0;    
+    text-decoration: underline;
 }
