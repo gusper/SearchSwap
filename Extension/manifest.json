@@ -4,8 +4,7 @@
     "description": "Simple, minimal, and trustworthy search engine switcher.",
     "version": "0.1.1",
     "permissions": [
-      "activeTab",
-      "tabs"
+      "activeTab"
     ],
     "icons": {
       "16": "images/ss-logo-16.png",
