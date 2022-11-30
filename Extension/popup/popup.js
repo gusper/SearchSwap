@@ -50,5 +50,5 @@ async function getSearchText(url) {
 
 async function moreInfoHandler(sender)
 {
-    chrome.tabs.create({ url: "https://gusperez.com/software/searchswap" })
+    chrome.tabs.create({ url: "https://gusperez.com/searchswap" })
 }
