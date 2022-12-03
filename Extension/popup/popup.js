@@ -1,7 +1,3 @@
-const btns = [...document.getElementsByClassName("target")];
-btns.forEach(btn => { btn.addEventListener("click", handler); });
-btnMoreInfo.addEventListener("click", moreInfoHandler);
-
 const targetList = new Map([
     ["amazon", "https://www.amazon.com/s?k=%s"],
     ["bing", "https://www.bing.com/search?q=%s"],
@@ -17,8 +13,7 @@ const targetList = new Map([
     ["hackernews", "https://hn.algolia.com/?q=%s"]
 ]);
 
-async function handler(sender)
-{
+async function handler(sender) {
     let queryOptions = { active: true, currentWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
     let searchText = await getSearchText(tab.url);
@@ -37,7 +32,7 @@ async function getSearchText(url) {
     let searchIdentifiers = ["q", "value", "search_query", "k"];
     let queryString = url.substring(url.indexOf("?") + 1, url.length);
     let vars = queryString.split('&');
-  
+    
     for (var i = 0; i < vars.length; i++) {
         for (let siIndex = 0; siIndex < searchIdentifiers.length; siIndex++) {
             let pair = vars[i].split('=');
@@ -48,7 +43,20 @@ async function getSearchText(url) {
     }
 }
 
-async function moreInfoHandler(sender)
-{
+function moreInfoHandler(sender) {
     chrome.tabs.create({ url: "https://gusperez.com/searchswap" })
 }
+
+function settingsHandler(sender) {
+    if (chrome.runtime.openOptionsPage) {
+        chrome.runtime.openOptionsPage();
+    } else {
+        window.open(chrome.runtime.getURL('options.html'));
+    }
+}
+
+// Set up event handlers
+const btns = [...document.getElementsByClassName("target")];
+btns.forEach(btn => { btn.addEventListener("click", handler); });
+btnMoreInfo.addEventListener("click", moreInfoHandler);
+btnSettings.addEventListener("click", settingsHandler);

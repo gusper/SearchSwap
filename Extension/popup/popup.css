@@ -76,13 +76,21 @@ button.target {
     margin: 0;
 }
 
-#btnMoreInfo {
+.footer-links {
     background-color: transparent;
     border: 0;
     color:rgb(65, 64, 64);
     cursor: pointer;
     font-size: 0.6em;
     float: right;
-    margin: 5px 15px 0 0;    
+    margin: 7px 15px 0 8px;    
     text-decoration: underline;
+}
+
+#btnMoreInfo {
+    float: right;
+}
+
+#btnSettings {
+    float:left;
 }
