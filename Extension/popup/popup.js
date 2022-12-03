@@ -25,7 +25,7 @@ async function handler(sender)
     let targetKey = sender.srcElement.id.substring(3).toLowerCase();
     
     if (!searchText) {
-        alert("Not finding search text in current tab's URL.");
+        alert("No search text found in current tab's URL.");
         return;
     }
     
