@@ -2,8 +2,8 @@
 var siteList;
 
 function save_options() {
-    var color = document.getElementById('color').value;
-    var likesColor = document.getElementById('like').checked;
+    let color = document.getElementById('color').value;
+    let likesColor = document.getElementById('like').checked;
     chrome.storage.sync.set({
         favoriteColor: color,
         likesColor: likesColor,
@@ -25,11 +25,13 @@ function restore_options() {
     chrome.storage.sync.get({
         favoriteColor: 'red',
         likesColor: true,
-        sites: new Map([])
+        sites: null
     }, function(items) {
         document.getElementById('color').value = items.favoriteColor;
         document.getElementById('like').checked = items.likesColor;
         siteList = items.sites;
+
+        
     });
 }
 
@@ -37,7 +39,12 @@ function add_site() {
     let name = document.getElementById('txtName').value;
     let url = document.getElementById('txtUrl').value;
     
-    siteList.push([name, url]);
+    if (!siteList) {
+        siteList = new Map();
+    }
+
+    siteList.set(name, url);
+
     console.log(siteList);
 }
 
