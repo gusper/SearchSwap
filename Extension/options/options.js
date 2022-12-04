@@ -30,8 +30,9 @@ function restore_options() {
         document.getElementById('color').value = items.favoriteColor;
         document.getElementById('like').checked = items.likesColor;
         siteList = items.sites;
+    
+        console.log(siteList);
 
-        
     });
 }
 
@@ -46,6 +47,13 @@ function add_site() {
     siteList.set(name, url);
 
     console.log(siteList);
+
+    refresh_site_list();
+}
+
+function refresh_site_list() {
+    let sl = document.getElementById('site-list');
+    sl.textContent = "test";
 }
 
 // Set up event handlers
