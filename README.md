@@ -3,7 +3,7 @@ Minimal and super simple browser extension for Google Chrome and Microsoft Edge 
 
 ## Install
 * [Chrome](https://chrome.google.com/webstore/detail/searchswap/meakfdkjiehkccdibhahjlgnihicmlel)
-* Edge (coming soon)
+* [Edge](https://microsoftedge.microsoft.com/addons/detail/searchswap/mhegncmnkpdckdpomfmedhflbfdkfpie)
 
 ## More info
 * [GusPerez.com/SearchSwap](https://gusperez.com/searchswap/)
