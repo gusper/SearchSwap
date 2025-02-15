@@ -1,11 +1,7 @@
-const btns = [...document.getElementsByClassName("target")];
-btns.forEach(btn => { btn.addEventListener("click", handler); });
-btnMoreInfo.addEventListener("click", moreInfoHandler);
-
 const targetList = new Map([
     ["amazon", "https://www.amazon.com/s?k=%s"],
     ["bing", "https://www.bing.com/search?q=%s"],
-    ["bluesky", "https://bsky.app/search?q=%s"]
+    ["bluesky", "https://bsky.app/search?q=%s"],
     ["duckduckgo", "https://duckduckgo.com/?q=%s"],
     ["github", "https://github.com/search?q=%s&ref=opensearch"],
     ["google", "https://www.google.com/search?q=%s"],
@@ -18,8 +14,11 @@ const targetList = new Map([
     ["youtube", "https://www.youtube.com/results?search_query=%s&page={startPage?}&utm_source=opensearch"]
 ]);
 
-async function handler(sender)
-{
+const btns = [...document.getElementsByClassName("target")];
+btns.forEach(btn => { btn.addEventListener("click", handler); });
+btnMoreInfo.addEventListener("click", moreInfoHandler);
+
+async function handler(sender) {
     let queryOptions = { active: true, currentWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
     let searchText = await getSearchText(tab.url);
@@ -49,7 +48,6 @@ async function getSearchText(url) {
     }
 }
 
-async function moreInfoHandler(sender)
-{
+async function moreInfoHandler(sender) {
     chrome.tabs.create({ url: "https://gusperez.com/searchswap" })
 }
