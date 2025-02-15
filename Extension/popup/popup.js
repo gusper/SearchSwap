@@ -6,6 +6,7 @@ const targetList = new Map([
     ["github", "https://github.com/search?q=%s&ref=opensearch"],
     ["google", "https://www.google.com/search?q=%s"],
     ["hackernews", "https://hn.algolia.com/?q=%s"],
+    ["mastodon", "https://mastodon.social/search?q=%s"],
     ["reddit", "https://www.reddit.com/search/?q=%s"],
     ["stackoverflow", "https://stackoverflow.com/search?q=%s"],
     ["superuser", "https://superuser.com/search?q=%s"],
