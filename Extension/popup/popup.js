@@ -9,9 +9,7 @@ chrome.storage.sync.get({ targetList: Array.from(defaultTargetList) }, function(
     if (data.targetList === null || data.targetList.length === 0) {
         chrome.storage.sync.set({ targetList: Array.from(defaultTargetList) });
     }
-    console.log('targetList', targetList); 
-    targetList = new Map(data.targetList);
-    console.log('targetList', targetList); 
+    targetList = new Map(data.targetList.map(item => [item.name, item]));
     initializePopup();
 });
 

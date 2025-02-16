@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const targetListElement = document.getElementById('targetList');
 
     chrome.storage.sync.get({ targetList: Array.from(defaultTargetList) }, function(data) {
-        const targetList = new Map(data.targetList);
+        const targetList = new Map(data.targetList.map(item => [item.name, item]));
         renderTargetList(targetList);
         utils.cl('targetList', targetList);
     });
