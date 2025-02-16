@@ -1,22 +1,22 @@
 import { defaultTargetList } from '../common/common.js';
 import { utils } from '../common/common.js';
 
-let targetList;
+let sitesMap;
 
 // Load site list from storage or use default list
-chrome.storage.sync.get({ targetList: Array.from(defaultTargetList) }, function(data) {
+chrome.storage.sync.get({ targetList: defaultTargetList }, function(data) {
     // If starting with default list, save it in storage
     if (data.targetList === defaultTargetList) {
-        chrome.storage.sync.set({ targetList: Array.from(defaultTargetList) });
+        chrome.storage.sync.set({ targetList: defaultTargetList });
     }
-    targetList = new Map(data.targetList.map(item => [item.name, item]));
+    sitesMap = new Map(data.targetList.map(item => [item.name, item]));
     initializePopup();
 });
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
     console.log('In onChanged listener');
     if (changes.targetList) {
-        targetList = new Map(changes.targetList.newValue);
+        sitesMap = new Map(changes.targetList.map(item => [item.name, item]));
         initializePopup();
     }
 });
@@ -29,7 +29,7 @@ function initializePopup() {
         targetsDiv.innerHTML = '';
 
         // Create a new element for each item in targetList
-        targetList.forEach((item, name) => {
+        sitesMap.forEach((item, name) => {
             const newElement = document.createElement('button');
             newElement.textContent = item.displayName;
             newElement.className = 'target';
@@ -62,7 +62,7 @@ async function handler(sender) {
         return;
     }
     
-    let searchUrl = targetList.get(targetKey.toLowerCase()).url.replace("%s", searchText);
+    let searchUrl = sitesMap.get(targetKey.toLowerCase()).url.replace("%s", searchText);
     chrome.tabs.create({ url: searchUrl })
 }
 

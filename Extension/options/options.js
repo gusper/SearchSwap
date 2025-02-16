@@ -5,22 +5,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const targetForm = document.getElementById('targetForm');
     const targetListElement = document.getElementById('targetList');
 
-    chrome.storage.sync.get({ targetList: Array.from(defaultTargetList) }, function(data) {
-        const targetList = new Map(data.targetList.map(item => [item.name, item]));
-        renderTargetList(targetList);
-        console.log('targetList', targetList);
+    chrome.storage.sync.get({ targetList: defaultTargetList }, function(data) {
+        const sitesMap = new Map(data.targetList.map(item => [item.name, item]));
+        renderTargetList(sitesMap);
+        console.log('sitesMap', sitesMap);
     });
 
     targetForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        const targetName = document.getElementById('targetName').value.toLowerCase();
-        const targetUrl = document.getElementById('targetUrl').value;
+        const siteID = document.getElementById('targetName').value.toLowerCase();
+        const siteName = document.getElementById('targetName').value;
+        const siteUrl = document.getElementById('targetUrl').value;
 
         chrome.storage.sync.get({ targetList: [] }, function(data) {
-            const targetList = new Map(data.targetList);
-            targetList.set(targetName, targetUrl);
-            chrome.storage.sync.set({ targetList: Array.from(targetList) }, function() {
-                renderTargetList(targetList);
+            const sitesMap = new Map(data.targetList);
+            sitesMap.set(siteID, { name: siteID, displayName: siteName, url: siteUrl });
+            chrome.storage.sync.set({ targetList: Array.from(sitesMap, function(e) {
+                return e[1];
+            }) }, function() {
+                renderTargetList(sitesMap);
             });
         });
     });
@@ -35,7 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
             deleteButton.textContent = 'Delete';
             deleteButton.addEventListener('click', function() {
                 targetList.delete(name);
-                chrome.storage.sync.set({ targetList: Array.from(targetList) }, function() {
+                chrome.storage.sync.set({ targetList: Array.from(targetList, function(e) {
+                    return e[1];
+                }) }, function() {
                     renderTargetList(targetList);
                 });
             });
