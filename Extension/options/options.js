@@ -20,9 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         chrome.storage.sync.get({ targetList: [] }, function(data) {
             const sitesMap = new Map(data.targetList);
             sitesMap.set(siteID, { name: siteID, displayName: siteName, url: siteUrl });
-            chrome.storage.sync.set({ targetList: Array.from(sitesMap, function(e) {
-                return e[1];
-            }) }, function() {
+            chrome.storage.sync.set({ targetList: Array.from(sitesMap.values()) }, function() {
                 renderTargetList(sitesMap);
             });
         });
@@ -38,9 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
             deleteButton.textContent = 'Delete';
             deleteButton.addEventListener('click', function() {
                 targetList.delete(name);
-                chrome.storage.sync.set({ targetList: Array.from(targetList, function(e) {
-                    return e[1];
-                }) }, function() {
+                chrome.storage.sync.set({ targetList: Array.from(targetList.values()) }, function() {
                     renderTargetList(targetList);
                 });
             });
