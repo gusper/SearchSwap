@@ -1,29 +1,31 @@
 const defaultTargetList = [
-    ["amazon", "https://www.amazon.com/s?k=%s"],
-    ["bing", "https://www.bing.com/search?q=%s"],
-    ["bluesky", "https://bsky.app/search?q=%s"],
-    ["duckduckgo", "https://duckduckgo.com/?q=%s"],
-    ["github", "https://github.com/search?q=%s&ref=opensearch"],
-    ["google", "https://www.google.com/search?q=%s"],
-    ["hackernews", "https://hn.algolia.com/?q=%s"],
-    ["mastodon", "https://mastodon.social/search?q=%s"],
-    ["reddit", "https://www.reddit.com/search/?q=%s"],
-    ["stackoverflow", "https://stackoverflow.com/search?q=%s"],
-    ["superuser", "https://superuser.com/search?q=%s"],
-    ["twitter", "https://twitter.com/search?q=%s"],
-    ["ultimateguitar", "https://www.ultimate-guitar.com/search.php?search_type=title&value=%s"],
-    ["youtube", "https://www.youtube.com/results?search_query=%s&page={startPage?}&utm_source=opensearch"]
+    ["amazon", { displayName: "Amazon", url: "https://www.amazon.com/s?k=%s" }],
+    ["bing", { displayName: "Bing", url: "https://www.bing.com/search?q=%s" }],
+    ["bluesky", { displayName: "Bluesky", url: "https://bsky.app/search?q=%s" }],
+    ["duckduckgo", { displayName: "Duck Duck Go", url: "https://duckduckgo.com/?q=%s" }],
+    ["github", { displayName: "GitHub", url: "https://github.com/search?q=%s&ref=opensearch" }],
+    ["google", { displayName: "Google", url: "https://www.google.com/search?q=%s" }],
+    ["hackernews", { displayName: "Hacker News", url: "https://hn.algolia.com/?q=%s" }],
+    ["mastodon", { displayName: "Mastodon", url: "https://mastodon.social/search?q=%s" }],
+    ["reddit", { displayName: "Reddit", url: "https://www.reddit.com/search/?q=%s" }],
+    ["stackoverflow", { displayName: "Stack Overflow", url: "https://stackoverflow.com/search?q=%s" }],
+    ["superuser", { displayName: "Super User", url: "https://superuser.com/search?q=%s" }],
+    ["x", { displayName: "X", url: "https://x.com/search?q=%s" }],
+    ["ultimateguitar", { displayName: "Ultimate Guitar", url: "https://www.ultimate-guitar.com/search.php?search_type=title&value=%s" }],
+    ["youtube", { displayName: "YouTube", url: "https://www.youtube.com/results?search_query=%s&page={startPage?}&utm_source=opensearch" }]
 ];
 
 let targetList;
+console.log('targetList >'); 
 console.log(targetList);
 
-chrome.storage.sync.get({ targetList: defaultTargetList }, function(data) {
+// Load site list from storage or use default list
+chrome.storage.sync.get({ targetList: Array.from(defaultTargetList) }, function(data) {
     if (data.targetList === null || data.targetList.length === 0) {
-        chrome.storage.sync.set({ targetList: defaultTargetList });
+        chrome.storage.sync.set({ targetList: Array.from(defaultTargetList) });
     }
-    console.log(targetList);
     targetList = new Map(data.targetList);
+    console.log('targetList >'); 
     console.log(targetList);
     initializePopup();
 });
@@ -44,12 +46,12 @@ function initializePopup() {
         targetsDiv.innerHTML = '';
 
         // Create a new element for each item in targetList
-        targetList.forEach((url, name) => {
+        targetList.forEach((item, name) => {
             const newElement = document.createElement('button');
-            newElement.textContent = name;
+            newElement.textContent = item.displayName;
             newElement.className = 'target';
             newElement.type = 'button';
-            newElement.id = `btn-${name.toLowerCase()}`;
+            newElement.id = `btn-${name}`;
             targetsDiv.appendChild(newElement);
         });
     }
@@ -77,7 +79,7 @@ async function handler(sender) {
         return;
     }
     
-    let searchUrl = targetList.get(targetKey.toLowerCase()).replace("%s", searchText);
+    let searchUrl = targetList.get(targetKey.toLowerCase()).url.replace("%s", searchText);
     chrome.tabs.create({ url: searchUrl })
 }
 
