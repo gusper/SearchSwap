@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.storage.sync.get({ targetList: [] }, function(data) {
         const targetList = new Map(data.targetList);
         renderTargetList(targetList);
+        utils.cl('targetList', targetList);
     });
 
     targetForm.addEventListener('submit', function(event) {
