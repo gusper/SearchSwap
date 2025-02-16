@@ -2,11 +2,11 @@ import { defaultTargetList } from '../common/common.js';
 import { utils } from '../common/common.js';
 
 let targetList;
-console.log('targetList', targetList); 
 
 // Load site list from storage or use default list
 chrome.storage.sync.get({ targetList: Array.from(defaultTargetList) }, function(data) {
-    if (data.targetList === null || data.targetList.length === 0) {
+    // If starting with default list, save it in storage
+    if (data.targetList === defaultTargetList) {
         chrome.storage.sync.set({ targetList: Array.from(defaultTargetList) });
     }
     targetList = new Map(data.targetList.map(item => [item.name, item]));
@@ -30,7 +30,6 @@ function initializePopup() {
 
         // Create a new element for each item in targetList
         targetList.forEach((item, name) => {
-            console.log('targetList', targetList);
             const newElement = document.createElement('button');
             newElement.textContent = item.displayName;
             newElement.className = 'target';
