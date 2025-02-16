@@ -23,9 +23,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderTargetList(targetList) {
         targetListElement.innerHTML = '';
-        targetList.forEach((url, name) => {
+        targetList.forEach((item, name) => {
             const li = document.createElement('li');
-            li.textContent = `${name}: ${url}`;
+            li.textContent = `${item.displayName}: ${item.url}`;
+
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             deleteButton.addEventListener('click', function() {
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
             li.appendChild(deleteButton);
+            
             targetListElement.appendChild(li);
         });
     }
