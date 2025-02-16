@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const targetForm = document.getElementById('targetForm');
     const targetListElement = document.getElementById('targetList');
 
-    chrome.storage.sync.get({ targetList: [] }, function(data) {
+    chrome.storage.sync.get({ targetList: Array.from(defaultTargetList) }, function(data) {
         const targetList = new Map(data.targetList);
         renderTargetList(targetList);
         utils.cl('targetList', targetList);
