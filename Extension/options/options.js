@@ -1,3 +1,6 @@
+import { defaultTargetList } from '../common/common.js';
+import { utils } from '../common/common.js';
+
 document.addEventListener('DOMContentLoaded', function() {
     const targetForm = document.getElementById('targetForm');
     const targetListElement = document.getElementById('targetList');

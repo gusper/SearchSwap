@@ -1,23 +1,8 @@
-const defaultTargetList = [
-    ["amazon", { displayName: "Amazon", url: "https://www.amazon.com/s?k=%s" }],
-    ["bing", { displayName: "Bing", url: "https://www.bing.com/search?q=%s" }],
-    ["bluesky", { displayName: "Bluesky", url: "https://bsky.app/search?q=%s" }],
-    ["duckduckgo", { displayName: "Duck Duck Go", url: "https://duckduckgo.com/?q=%s" }],
-    ["github", { displayName: "GitHub", url: "https://github.com/search?q=%s&ref=opensearch" }],
-    ["google", { displayName: "Google", url: "https://www.google.com/search?q=%s" }],
-    ["hackernews", { displayName: "Hacker News", url: "https://hn.algolia.com/?q=%s" }],
-    ["mastodon", { displayName: "Mastodon", url: "https://mastodon.social/search?q=%s" }],
-    ["reddit", { displayName: "Reddit", url: "https://www.reddit.com/search/?q=%s" }],
-    ["stackoverflow", { displayName: "Stack Overflow", url: "https://stackoverflow.com/search?q=%s" }],
-    ["superuser", { displayName: "Super User", url: "https://superuser.com/search?q=%s" }],
-    ["x", { displayName: "X", url: "https://x.com/search?q=%s" }],
-    ["ultimateguitar", { displayName: "Ultimate Guitar", url: "https://www.ultimate-guitar.com/search.php?search_type=title&value=%s" }],
-    ["youtube", { displayName: "YouTube", url: "https://www.youtube.com/results?search_query=%s&page={startPage?}&utm_source=opensearch" }]
-];
+import { defaultTargetList } from '../common/common.js';
+import { utils } from '../common/common.js';
 
 let targetList;
-console.log('targetList >'); 
-console.log(targetList);
+utils.cl('targetList', targetList); 
 
 // Load site list from storage or use default list
 chrome.storage.sync.get({ targetList: Array.from(defaultTargetList) }, function(data) {
@@ -25,8 +10,7 @@ chrome.storage.sync.get({ targetList: Array.from(defaultTargetList) }, function(
         chrome.storage.sync.set({ targetList: Array.from(defaultTargetList) });
     }
     targetList = new Map(data.targetList);
-    console.log('targetList >'); 
-    console.log(targetList);
+    utils.cl('targetList', targetList); 
     initializePopup();
 });
 
@@ -47,6 +31,7 @@ function initializePopup() {
 
         // Create a new element for each item in targetList
         targetList.forEach((item, name) => {
+            utils.cl('targetList', targetList); 
             const newElement = document.createElement('button');
             newElement.textContent = item.displayName;
             newElement.className = 'target';
@@ -57,7 +42,7 @@ function initializePopup() {
     }
 
     const btns = [...document.getElementsByClassName("target")];
-    console.log(btns);
+    utils.cl('btns', btns);
     btns.forEach(btn => { 
         btn.addEventListener("click", handler); 
         console.log(btn.id);
