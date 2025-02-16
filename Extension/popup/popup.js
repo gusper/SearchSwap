@@ -2,15 +2,16 @@ import { defaultTargetList } from '../common/common.js';
 import { utils } from '../common/common.js';
 
 let targetList;
-utils.cl('targetList', targetList); 
+console.log('targetList', targetList); 
 
 // Load site list from storage or use default list
 chrome.storage.sync.get({ targetList: Array.from(defaultTargetList) }, function(data) {
     if (data.targetList === null || data.targetList.length === 0) {
         chrome.storage.sync.set({ targetList: Array.from(defaultTargetList) });
     }
+    console.log('targetList', targetList); 
     targetList = new Map(data.targetList);
-    utils.cl('targetList', targetList); 
+    console.log('targetList', targetList); 
     initializePopup();
 });
 
@@ -31,7 +32,7 @@ function initializePopup() {
 
         // Create a new element for each item in targetList
         targetList.forEach((item, name) => {
-            utils.cl('targetList', targetList); 
+            console.log('targetList', targetList);
             const newElement = document.createElement('button');
             newElement.textContent = item.displayName;
             newElement.className = 'target';
@@ -42,10 +43,10 @@ function initializePopup() {
     }
 
     const btns = [...document.getElementsByClassName("target")];
-    utils.cl('btns', btns);
+    console.log('btns', btns);
     btns.forEach(btn => { 
         btn.addEventListener("click", handler); 
-        console.log(btn.id);
+        console.log('btn.id', btn.id);
     });
     btnMoreInfo.addEventListener("click", moreInfoHandler);
 }
@@ -54,7 +55,7 @@ async function handler(sender) {
     console.log('in handler(' + sender.srcElement.id + ')');
     let queryOptions = { active: true, currentWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
-    console.log('tab.url = ' + tab.url);
+    console.log('tab.url', tab.url);
     let searchText = await getSearchText(tab.url);
 
     let targetKey = sender.srcElement.id.substring(4).toLowerCase();

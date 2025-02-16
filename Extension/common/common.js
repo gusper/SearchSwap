@@ -17,13 +17,5 @@ export const defaultTargetList = [
 
 export const utils = {
 
-    cl(message) {
-        console.log(message);
-    },
-    
-    cl(label, object) {
-        console.log(`[${label}]`);
-        console.log(object);
-    }
     
 };
