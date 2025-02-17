@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
+            deleteButton.className = 'delete';
             deleteButton.addEventListener('click', function() {
                 sitesMap.delete(name);
                 chrome.storage.sync.set({ targetList: Array.from(sitesMap.values()) }, function() {

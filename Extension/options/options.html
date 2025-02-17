@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Manage sites</title>
+    <title>SearchSwap - Options</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noticia+Text:wght@700&family=Titillium+Web:wght@400;600;700&display=swap"
+      rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="options.css" />
     <script type="module" src="options.js"></script>
 </head>
 <body>
-    <h1>Manage sites</h1>
-    <form id="targetForm">
-        <input type="text" id="targetName" placeholder="Site name" required>
-        <input type="url" id="targetUrl" placeholder="Site URL" required>
-        <button type="submit">Add/update site</button>
-    </form>
-    <ul id="siteList"></ul>
+    <div id="container">
+        <div id="header">
+            <h1>SearchSwap - Options</h1>
+        </div>
+        <form id="targetForm">
+            <input type="text" id="targetName" placeholder="Site name" required>
+            <input type="url" id="targetUrl" placeholder="Site URL" required>
+            <button type="submit">Add/update site</button>
+        </form>
+        <ul id="siteList"></ul>
+    </div>
 </body>
 </html>
