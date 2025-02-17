@@ -1,5 +1,4 @@
 import { defaultTargetList } from '../common/common.js';
-import { utils } from '../common/common.js';
 
 let sitesMap;
 

@@ -14,8 +14,3 @@ export const defaultTargetList = [
     { id: "ultimateguitar", name: "Ultimate Guitar", url: "https://www.ultimate-guitar.com/search.php?search_type=title&value=%s" },
     { id: "youtube", name: "YouTube", url: "https://www.youtube.com/results?search_query=%s&page={startPage?}&utm_source=opensearch" }
 ];
-
-export const utils = {
-
-    
-};
