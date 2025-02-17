@@ -37,7 +37,7 @@ div {
     margin: 10px 5px 10px 10px;
 }
 
-#targets {
+#sites {
     display: inline-flex;
     flex-flow: row wrap;
     margin: 2px 5px 5px;
