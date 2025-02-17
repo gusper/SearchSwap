@@ -9,14 +9,14 @@ chrome.storage.sync.get({ targetList: defaultTargetList }, function(data) {
     if (data.targetList === defaultTargetList) {
         chrome.storage.sync.set({ targetList: defaultTargetList });
     }
-    sitesMap = new Map(data.targetList.map(item => [item.name, item]));
+    sitesMap = new Map(data.targetList.map(item => [item.id, item]));
     initializePopup();
 });
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
     console.log('In onChanged listener');
     if (changes.targetList) {
-        sitesMap = new Map(changes.targetList.map(item => [item.name, item]));
+        sitesMap = new Map(changes.targetList.map(item => [item.id, item]));
         initializePopup();
     }
 });
@@ -31,10 +31,10 @@ function initializePopup() {
         // Create a new element for each item in targetList
         sitesMap.forEach((item, name) => {
             const newElement = document.createElement('button');
-            newElement.textContent = item.displayName;
+            newElement.textContent = item.name;
             newElement.className = 'target';
             newElement.type = 'button';
-            newElement.id = `btn-${name}`;
+            newElement.id = `btn-${item.id}`;
             targetsDiv.appendChild(newElement);
         });
     }

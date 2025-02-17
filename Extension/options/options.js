@@ -3,7 +3,7 @@ import { utils } from '../common/common.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     const targetForm = document.getElementById('targetForm');
-    const targetListElement = document.getElementById('targetList');
+    const siteListElement = document.getElementById('siteList');
 
     chrome.storage.sync.get({ targetList: defaultTargetList }, function(data) {
         const sitesMap = new Map(data.targetList.map(item => [item.name, item]));
@@ -26,26 +26,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    function renderTargetList(targetList) {
-        targetListElement.innerHTML = '';
-        targetList.forEach((item, name) => {
+    /**
+     * Renders a list of sites into the target list element.
+     * Each item is displayed with its name and URL, along with a delete button.
+     * When the delete button is clicked, the item is removed from the list and the updated list is saved to Chrome storage.
+     *
+     * @param {Map} sitesMap - A Map object containing the target items to be rendered. 
+     *                         Each item should have a 'name' and 'url' property.
+     */
+    function renderTargetList(sitesMap) {
+        siteListElement.innerHTML = '';
+        sitesMap.forEach((item, name) => {
             const li = document.createElement('li');
-            li.textContent = `${item.displayName}: ${item.url}`;
+            li.textContent = `${item.name}: ${item.url}`;
 
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             deleteButton.addEventListener('click', function() {
-                targetList.delete(name);
-                chrome.storage.sync.set({ targetList: Array.from(targetList.values()) }, function() {
-                    renderTargetList(targetList);
+                sitesMap.delete(name);
+                chrome.storage.sync.set({ targetList: Array.from(sitesMap.values()) }, function() {
+                    renderTargetList(sitesMap);
                 });
             });
             li.appendChild(deleteButton);
             
-            targetListElement.appendChild(li);
+            siteListElement.appendChild(li);
         });
     }
 
+    /**
+     * Creates an ID by converting the given name to lowercase and removing all spaces.
+     *
+     * @param {string} name - The name to be converted into an ID.
+     * @returns {string} The generated ID.
+     */
     function createID(name) {
         return name.toLowerCase().replaceAll(' ', '');
     }
