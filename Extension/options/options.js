@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     targetForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        const siteID = document.getElementById('targetName').value.toLowerCase();
+        const siteID = createID(document.getElementById('targetName').value);
         const siteName = document.getElementById('targetName').value;
         const siteUrl = document.getElementById('targetUrl').value;
 
-        chrome.storage.sync.get({ targetList: [] }, function(data) {
-            const sitesMap = new Map(data.targetList);
+        chrome.storage.sync.get({ targetList: defaultTargetList }, function(data) {
+            const sitesMap = new Map(data.targetList.map(item => [item.name, item]));
             sitesMap.set(siteID, { name: siteID, displayName: siteName, url: siteUrl });
             chrome.storage.sync.set({ targetList: Array.from(sitesMap.values()) }, function() {
                 renderTargetList(sitesMap);
@@ -44,5 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             targetListElement.appendChild(li);
         });
+    }
+
+    function createID(name) {
+        return name.toLowerCase().replaceAll(' ', '');
     }
 });
