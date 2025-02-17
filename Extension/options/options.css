@@ -22,16 +22,27 @@ div {
     width: 100%;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    padding: 5px;
+    margin: 5px 10px;
+}
+
 #title {
     color:rgb(65, 64, 64);
     font-family: 'Noticia Text', serif;
     font-size: 1.4em;
     float: left;
-    margin: 5px;
+    margin: 0px;
+    padding: 10px;
 }
 
 li {
     height: 1.2em;
+    padding: 5px;
+    margin: 5px 10px;
+}
+
+form {
     padding: 5px;
     margin: 5px 10px;
 }
