@@ -2,7 +2,7 @@ export const defaultTargetList = [
     { id: "google", name: "Google", url: "https://www.google.com/search?q=%s" },
     { id: "bing", name: "Bing", url: "https://www.bing.com/search?q=%s" },
     { id: "reddit", name: "Reddit", url: "https://www.reddit.com/search/?q=%s" },
-    { id: "youtube", name: "YouTube", url: "https://www.youtube.com/results?search_query=%s&page={startPage?}&utm_source=opensearch" },
+    { id: "youtube", name: "YouTube", url: "https://www.youtube.com/results?search_query=%s" },
     { id: "bluesky", name: "Bluesky", url: "https://bsky.app/search?q=%s" },
     { id: "threads", name: "Threads", url: "https://www.threads.net/search?q=%s&serp_type=default" },
     { id: "instagram", name: "Instagram", url: "https://www.instagram.com/explore/search/keyword/?q=%s" },
