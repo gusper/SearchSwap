@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         chrome.storage.sync.get({ targetList: defaultTargetList }, function(data) {
             const sitesMap = new Map(data.targetList.map(item => [item.name, item]));
-            sitesMap.set(siteID, { name: siteID, displayName: siteName, url: siteUrl });
+            sitesMap.set(siteID, { id: siteID, name: siteName, url: siteUrl });
             chrome.storage.sync.set({ targetList: Array.from(sitesMap.values()) }, function() {
                 renderTargetList(sitesMap);
             });
