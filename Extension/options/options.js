@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         siteListElement.innerHTML = '';
         sitesMap.forEach((item, name) => {
             const li = document.createElement('li');
-            li.textContent = `${item.name}: ${item.url}`;
+            li.innerHTML = `<b>${item.name}</b>: ${item.url}`;
 
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
