@@ -14,7 +14,7 @@ chrome.storage.sync.get({ targetList: defaultTargetList }, function(data) {
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
     if (changes.targetList) {
-        sitesMap = new Map(changes.targetList.map(item => [item.id, item]));
+        sitesMap = new Map(changes.targetList.newValue.map(item => [item.id, item]));
         initializePopup();
     }
 });
@@ -32,7 +32,7 @@ function initializePopup() {
         targetsDiv.innerHTML = '';
 
         // Create a new element for each item in sitesMap
-        sitesMap.forEach((item, name) => {
+        sitesMap.forEach((item, key) => {
             const newElement = document.createElement('button');
             newElement.className = 'target';
             newElement.type = 'button';
@@ -59,8 +59,13 @@ function initializePopup() {
 
     // Add event listeners to buttons
     const btns = [...document.getElementsByClassName("target")];
-    btns.forEach(btn => { btn.addEventListener("click", handler); });
-    btnMoreInfo.addEventListener("click", moreInfoHandler);
+    btns.forEach(btn => { 
+        btn.addEventListener("click", handler); 
+    });
+    const btnMoreInfo = document.getElementById("btnMoreInfo");
+    if (btnMoreInfo) {
+        btnMoreInfo.addEventListener("click", moreInfoHandler);
+    }
 }
 
 /**
@@ -72,21 +77,26 @@ function initializePopup() {
  * @param {string} sender.srcElement.id - The ID of the source element.
  * @returns {Promise<void>} - A promise that resolves when the function completes.
  */
-async function handler(sender) {
-    console.log('in handler(' + sender.srcElement.id + ')');
+async function handler(event) {
     let queryOptions = { active: true, currentWindow: true };
     let [tab] = await chrome.tabs.query(queryOptions);
-    console.log('tab.url', tab.url);
     let searchText = await getSearchText(tab.url);
 
-    let targetKey = sender.srcElement.id.substring(4).toLowerCase();
+    let buttonElement = event.target.closest('button.target');
+    let targetKey = buttonElement ? buttonElement.id.substring(4).toLowerCase() : '';
     
     if (!searchText) {
         alert("Not finding search text in current tab's URL.");
         return;
     }
     
-    let searchUrl = sitesMap.get(targetKey.toLowerCase()).url.replace("%s", searchText);
+    const targetSite = sitesMap.get(targetKey);
+    if (!targetSite) {
+        alert("Site configuration not found for: " + targetKey);
+        return;
+    }
+    
+    let searchUrl = targetSite.url.replace("%s", searchText);
     chrome.tabs.create({ url: searchUrl })
 }
 
@@ -97,7 +107,9 @@ async function handler(sender) {
  * @returns {Promise<string|undefined>} - A promise that resolves to the search text if found, otherwise undefined.
  */
 async function getSearchText(url) {
-    console.log('getSearchText(' + url + ')');
+    if (!url || url.indexOf("?") === -1) {
+        return undefined;
+    }
     let searchIdentifiers = ["q", "value", "search_query", "k"];
     let queryString = url.substring(url.indexOf("?") + 1, url.length);
     let vars = queryString.split('&');
