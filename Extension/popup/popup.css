@@ -53,7 +53,8 @@ button.target {
     color: rgb(238, 238, 238);
     cursor: pointer;
     display: flex;
-    align-self: center;
+    align-items: center;
+    justify-content: flex-start;
     font-family: 'Titillium Web', sans-serif;
     font-size: 1rem;
     font-weight: 600;
@@ -63,7 +64,20 @@ button.target {
     width: 145px;
     padding: 5px 10px;
     text-decoration: none;
-    text-align: center;
+}
+
+button.target .favicon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+button.target .site-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
 }
 
 #footer {

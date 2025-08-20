@@ -34,10 +34,25 @@ function initializePopup() {
         // Create a new element for each item in sitesMap
         sitesMap.forEach((item, name) => {
             const newElement = document.createElement('button');
-            newElement.textContent = item.name;
             newElement.className = 'target';
             newElement.type = 'button';
             newElement.id = `btn-${item.id}`;
+            
+            // Create favicon image if available
+            if (item.favicon) {
+                const favicon = document.createElement('img');
+                favicon.src = item.favicon;
+                favicon.className = 'favicon';
+                favicon.alt = `${item.name} icon`;
+                newElement.appendChild(favicon);
+            }
+            
+            // Create text span for the name
+            const textSpan = document.createElement('span');
+            textSpan.textContent = item.name;
+            textSpan.className = 'site-name';
+            newElement.appendChild(textSpan);
+            
             targetsDiv.appendChild(newElement);
         });
     }
