@@ -38,10 +38,11 @@ div {
 }
 
 #sites {
-    display: inline-flex;
+    display: flex;
     flex-flow: row wrap;
-    margin: 8px 4px 8px;
-    gap: 2px;
+    justify-content: flex-start;
+    margin: 8px 12px;
+    gap: 6px;
 }
 
 button.target {
@@ -61,8 +62,8 @@ button.target {
     font-weight: 500;
     height: 34px;
     line-height: 1.3;
-    margin: 2px;
-    width: 158px;
+    margin: 0;
+    width: 157px;
     padding: 6px 12px;
     text-decoration: none;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
