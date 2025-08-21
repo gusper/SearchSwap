@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "SearchSwap",
     "description": "Simple, minimal, and trustworthy search engine switcher.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "content_security_policy": {
       "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
     },
@@ -19,5 +19,9 @@
     "action": {
       "default_popup": "popup/popup.html"
     },
-    "options_page": "options/options.html"
+    "options_page": "options/options.html",
+    "web_accessible_resources": [{
+      "resources": ["favicons/*"],
+      "matches": ["<all_urls>"]
+    }]
   }
